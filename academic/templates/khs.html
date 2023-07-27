@@ -1,0 +1,137 @@
+{% load mathfilters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ mahasiswa.nama_depan }} {{ mahasiswa.nama_belakang }} {{ program_studi }} {{ semester }} {{ kelas }}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'khs.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="letterhead">
+            <img class="logo" src="../static/images/logo-poltesa.png" alt="Poltesa logo">
+            <div class="title">
+                <span class="identity">
+                    KEMENTRIAN PENDIDIKAN DAN KEBUDAYAAN<br />
+                    POLITEKNIK NEGERI SAMBAS<br />
+                    JURUSAN MANAJEMEN INFORMATIKA<br />
+                </span>
+                <span class="contact">
+                    Jalan Raya Sejangkung Sambas, 79462 Kalimantan Barat<br />
+                    Telp. (0562) 6303333 / 63030000 Fax. (0562) 392592<br />
+                    Laman: www.poltesa.ac.id; email: info@poltesa.ac.id
+                </span>
+            </div>
+        </div>
+        <div class="student_information">
+            <div class="title">
+                <span class="card_name">KARTU HASIL STUDI</span>
+                <span class="academic_year">Tahun Akademik {{ tahun_akademik }}</span>
+            </div>
+            <div class="attributes">
+                <table>
+                    <tr>
+                        <td>Nama</td>
+                        <td class="colon">:</td>
+                        <td>{{ mahasiswa.nama_depan }} {{ mahasiswa.nama_belakang }}</td>
+                    </tr>
+                    <tr>
+                        <td>NIM</td>
+                        <td class="colon">:</td>
+                        <td>{{ mahasiswa.nim }}</td>
+                    </tr>
+                    <tr>
+                        <td>Kelas</td>
+                        <td class="colon">:</td>
+                        <td>{{ semester }} {{ kelas }}</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>Program Studi</td>
+                        <td class="colon">:</td>
+                        <td>{{program_studi }}</td>
+                    </tr>
+                    <tr>
+                        <td>Program Pendidikan</td>
+                        <td class="colon">:</td>
+                        <td>{{ program_pendidikan }}</td>
+                    </tr>
+                    <tr>
+                        <td>DPA</td>
+                        <td class="colon">:</td>
+                        <td>{{ mahasiswa.pembimbing_akademik.nama }} {{ mahasiswa.pembimbing_akademik.gelar }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <table class="scores_table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Mata Kuliah</th>
+                    <th>SKS (m)</th>
+                    <th>Nilai</th>
+                    <th>Huruf Mutu (b)</th>
+                    <th>Angka Mutu (a)</th>
+                    <th>(b) x (m)</th>
+                    <th>Keterangan</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for nilai in khs_scores %}
+                    {% with sks=nilai.mata_kuliah.jumlah_sks_praktik|add:nilai.mata_kuliah.jumlah_sks_teori  %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="mata_kuliah">{{ nilai.mata_kuliah.nama }}</td>
+                        <td>{{ nilai.nilai }}</td>
+                        <td>{{ sks }}</td>
+                        <td>{{ nilai.huruf_mutu }}</td>
+                        <td>{{ nilai.angka_mutu }}</td>
+                        <td>{{ sks|mul:nilai.angka_mutu }}</td>
+                        <td></td>
+                    </tr>
+                    {% endwith %}
+                {% endfor %}
+                <tr>
+                    <td colspan="2">Jumlah</td>
+                    <td></td>
+                    <td>{{ sks_total }}</td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ nilai_mutu_total }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2">Indeks Prestasi Semester (IPS)</td>
+                    <td colspan="5"></td>
+                    <td class="result" rowspan="4">{{ status }}</td>
+                </tr>
+                <tr>
+                    <td class="result" colspan="2">{{ ips }}</td>
+                    <td colspan="5"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="legalism">
+            <div class="jurusan">
+                <span>Mengetahui : <br />Ketua Jurusan<br /> Manajemen Informatika</span> <br />
+                <span class="name">{{ ketua_jurusan.nama }} {{ ketua_jurusan.gelar }}</span><br />
+                <span>NIP.{{ ketua_jurusan.nomor_induk }}</span>
+            </div>
+            <div class="prodi">
+                <span>Sambas, {{ today_date }} <br />Koordinator Program Studi <br /> Manajemen Informatika</span><br />
+                <span class="name">{{ koordinator_prodi.nama }} {{ koordinator_prodi.gelar }}</span><br />
+                <span>NIP. {{ koordinator_prodi.nomor_induk }}</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.print();
+    </script>
+</body>
+</html>

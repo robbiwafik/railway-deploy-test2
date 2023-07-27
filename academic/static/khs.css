@@ -1,0 +1,143 @@
+page {
+    background: white;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+
+page[size="A4"] {  
+    width: 21cm;
+    height: 29.7cm; 
+    padding: 30px;
+}
+
+body {
+    width: 21cm;
+    height: 29.7cm; 
+    padding: 30px;
+    margin: auto;
+}
+
+.container {
+    border: 1px solid #000;
+    height: 100%;
+}
+
+.letterhead {
+    border-bottom: 1px solid #000;
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.letterhead .logo {
+    width: 85px;
+    height: 85px;
+    position: absolute;
+    left: 20px;
+}
+
+.letterhead .title {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.letterhead .identity {
+    font-weight: bold;
+    font-size: 18px;
+    flex-basis: 100%;
+}
+
+.letterhead .contact {
+    font-size: 15px;
+}
+
+.student_information {
+    padding: 10px;
+}
+
+.student_information .title {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.student_information .card_name {
+    font-size: 17px;
+    margin-bottom: 5px;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.student_information .academic_year {
+    flex-basis: 100%;
+}
+
+.student_information .attributes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.student_information .attribute {
+    display: block;
+}
+
+.student_information .colon {
+    padding: 0 10px;
+}
+
+.scores_table, 
+.scores_table th,
+.scores_table td {
+    border: 1px solid #000;
+    padding: 5px 8px;
+}
+
+.scores_table,
+.scores_table th:first-child,
+.scores_table td:first-child {
+    border-left-width: 0;
+}
+
+.scores_table,
+.scores_table th:last-child,
+.scores_table td:last-child {
+    border-right-width: 0;
+}
+
+.scores_table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.scores_table .mata_kuliah {
+    text-align: left;
+}
+
+.scores_table .result {
+    font-weight: bold;
+}
+
+.legalism {
+    display: flex;
+    margin-top: 50px;
+    padding: 0 20px;
+    justify-content: space-around;
+}
+
+.legalism .name {
+    display: inline-block;
+    margin-top: 80px;
+    margin-bottom: 0;
+    text-decoration: underline;
+    font-weight: bold;
+}
